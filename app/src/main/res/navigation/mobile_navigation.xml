@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.em_tuntiesimerkki1.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_gallery"
+        android:name="com.example.em_tuntiesimerkki1.ui.gallery.GalleryFragment"
+        android:label="@string/menu_gallery"
+        tools:layout="@layout/fragment_gallery" />
+
+    <fragment
+        android:id="@+id/nav_slideshow"
+        android:name="com.example.em_tuntiesimerkki1.ui.slideshow.SlideshowFragment"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/dataReadFragment"
+        android:name="com.example.em_tuntiesimerkki1.DataReadFragment"
+        android:label="@string/menu_data"
+        tools:layout="@layout/fragment_data_read" >
+        <action
+            android:id="@+id/action_dataReadFragment_to_dataDetailFragment"
+            app:destination="@id/dataDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dataDetailFragment"
+        android:name="com.example.em_tuntiesimerkki1.DataDetailFragment"
+        android:label="fragment_data_detail"
+        tools:layout="@layout/fragment_data_detail" >
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+    <fragment
+        android:id="@+id/commentApiFragment"
+        android:name="com.example.em_tuntiesimerkki1.CommentApiFragment"
+        android:label="fragment_comment_api"
+        tools:layout="@layout/fragment_comment_api" />
+</navigation>
