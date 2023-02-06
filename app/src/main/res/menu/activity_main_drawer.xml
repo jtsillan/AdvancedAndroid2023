@@ -24,5 +24,9 @@
             android:id="@+id/commentApiFragment"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/api" />
+        <item
+            android:id="@+id/mapsFragment"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/maps" />
     </group>
 </menu>

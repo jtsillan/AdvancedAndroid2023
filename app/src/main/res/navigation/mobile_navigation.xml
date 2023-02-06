@@ -45,5 +45,24 @@
         android:id="@+id/commentApiFragment"
         android:name="com.example.em_tuntiesimerkki1.CommentApiFragment"
         android:label="fragment_comment_api"
-        tools:layout="@layout/fragment_comment_api" />
+        tools:layout="@layout/fragment_comment_api" >
+        <action
+            android:id="@+id/action_commentApiFragment_to_apiDetailFragment"
+            app:destination="@id/apiDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/apiDetailFragment"
+        android:name="com.example.em_tuntiesimerkki1.ApiDetailFragment"
+        android:label="fragment_api_detail"
+        tools:layout="@layout/fragment_api_detail" >
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.example.em_tuntiesimerkki1.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" />
 </navigation>

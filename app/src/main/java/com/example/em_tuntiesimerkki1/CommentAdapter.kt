@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.em_tuntiesimerkki1.databinding.RecyclerviewItemRowBinding
 
@@ -56,14 +57,33 @@ class CommentAdapter(private val comments: List<Comment>) : RecyclerView.Adapter
             // otetaan kommentti talteen ylätasolla, että voimme käyttää sitä myös esim. onClick
             this.comment = comment
 
-            view.textViewCommentName.text = comment.name
+            // Tallennetaan kommentin nimi Stringiksi
+            var commentName : String = comment.name as String
+
+            // Jos kemmentin pituus on yli 20 merkkiä, lyhennetään 20:een merkkiin
+            // ja lisätään kolme pistettä
+            if(commentName.length > 20) {
+                commentName = commentName.substring(0, 20) + "..."
+            }
+
+            // oli kommentin nimi mitä tahansa, asetetaan se käyttöliittymään
+            view.textViewCommentName.text = commentName
+
+            // asetetaan muut tiedot ulkoasuun
             view.textViewCommentEmail.text = comment.email
             view.textViewCommentBody.text = comment.body
         }
 
-        // jos itemiä klikataan käyttöliittymässä, ajetaan tämä koodio
+        // jos itemiä klikataan käyttöliittymässä, ajetaan tämä koodi
         override fun onClick(v: View) {
-            Log.d("ADVTECH", "RecyclerView clicked!!!")
+            Log.d("ADVTECH", "RecyclerView clicked!!!" + comment?.id.toString())
+
+            // muutetaan Int? => Int
+            val commentId = comment?.id as Int
+
+            // navigoidaan ApiFragmentista --> ApiDetailFragment, parametrina kommentin id
+            val action = CommentApiFragmentDirections.actionCommentApiFragmentToApiDetailFragment(commentId)
+            v.findNavController().navigate(action)
         }
     }
 }
