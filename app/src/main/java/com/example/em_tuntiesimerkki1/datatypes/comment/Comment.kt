@@ -1,4 +1,4 @@
-package com.example.em_tuntiesimerkki1
+package com.example.em_tuntiesimerkki1.datatypes.comment
 
 import com.google.gson.annotations.SerializedName
 

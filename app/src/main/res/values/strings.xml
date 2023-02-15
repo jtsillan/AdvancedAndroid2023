@@ -19,4 +19,7 @@
     <string name="zoom_on_off">ZOOM on/off</string>
     <string name="normal">Normal</string>
     <string name="hybrid">Hybrid</string>
+    <string name="city_weather">City Weather</string>
+    <string name="open_street_maps">Open Street Maps</string>
+    <string name="textview">TextView</string>
 </resources>

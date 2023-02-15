@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.em_tuntiesimerkki1.databinding.RecyclerviewItemRowBinding
+import com.example.em_tuntiesimerkki1.datatypes.comment.Comment
 
 class CommentAdapter(private val comments: List<Comment>) : RecyclerView.Adapter<CommentAdapter.CommentHolder>() {
 

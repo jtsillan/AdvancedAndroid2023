@@ -1,85 +1,82 @@
-package com.example.em_tuntiesimerkki1
+package com.example.em_tuntiesimerkki1.datatypes.cityweather
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.navigation.fragment.navArgs
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.example.em_tuntiesimerkki1.databinding.FragmentCommentApiBinding
-import com.example.em_tuntiesimerkki1.datatypes.comment.Comment
+import com.example.em_tuntiesimerkki1.BuildConfig
+import com.example.em_tuntiesimerkki1.R
+import com.example.em_tuntiesimerkki1.databinding.FragmentCityMarkerBinding
 import com.google.gson.GsonBuilder
 
 /**
  * A simple [Fragment] subclass.
- * Use the [CommentApiFragment.newInstance] factory method to
+ * Use the [CityMarkerFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class CommentApiFragment : Fragment() {
+class CityMarkerFragment : Fragment() {
     // change this to match your fragment name
-    private var _binding: FragmentCommentApiBinding? = null
+    private var _binding: FragmentCityMarkerBinding? = null
 
-    // alustetaan viittaus adapteriin sekä luodaan LinearLayoutManager
-    // RecyclerView tarvitsee jonkin LayoutManagerin, joista yksinkertaisin on Linear
-    private lateinit var adapter: CommentAdapter
-    private lateinit var linearLayoutManager: LinearLayoutManager
+    // Get fragment parameters from previous fragment
+    val args: CityMarkerFragmentArgs by navArgs()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentCommentApiBinding.inflate(inflater, container, false)
+        _binding = FragmentCityMarkerBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        // Luodaan layout manager ja kytketään se ulkoasun recyclerview
-        linearLayoutManager = LinearLayoutManager(context)
-        binding.recyclerView.layoutManager = linearLayoutManager
+        getWeather()
 
         // the binding -object allows you to access views in the layout, textviews etc.
-        binding.buttonGetComments.setOnClickListener {
-            getComments()
-        }
 
         return root
     }
 
-    fun getComments() {
-        // this is the url where we want to get our data from
-        val JSON_URL = "https://jsonplaceholder.typicode.com/comments"
-        // Alustetaan GSON
+    private fun getWeather() {
+        // Haetaan API-key local.properties-tiedostosta
+        val API_KEY : String = BuildConfig.OPEN_WEATHER_MAP_API_KEY
+        val JSON_URL : String = "https://api.openweathermap.org/data/2.5/weather?lat=${args.latitude}&lon=${args.longitude}&appid=${API_KEY}&units=metric"
+
         val gson = GsonBuilder().setPrettyPrinting().create()
 
         // Request a string response from the provided URL.
-        val stringRequest: StringRequest = object : StringRequest(
+        val stringRequest: StringRequest = @SuppressLint("SetTextI18n")
+        object : StringRequest(
             Request.Method.GET, JSON_URL,
             Response.Listener { response ->
 
                 // print the response as a whole
                 // we can use GSON to modify this response into something more usable
-                //Log.d("ADVTECH", response)
-                // Muutetaan raaka-JSON rajapinnasta (responce) GSON:n avulla listaksi Comment-objektiksi
-                var rows : List<Comment> = gson.fromJson(response, Array<Comment>::class.java).toList()
+                Log.d("ADVTECH", response)
 
-                // if the fetched data (Valley/GSON) is in varible "rows", we can set the data like this:
-                adapter = CommentAdapter(rows)
-                binding.recyclerView.adapter = adapter
+                // Muunnetaan data CityWeather-olioksi
+                var item: CityWeather = gson.fromJson(response, CityWeather::class.java)
 
-                // Tulostetaan silmukassa jokaiasen kommentin email-osoite
-                for (item : Comment in rows) {
-                    Log.d("ADVTECT", item.email.toString())
-                }
+                // Haetaan pelkkä lämpötila
+                Log.d("ADVTECH", item.main?.temp.toString() + " C")
 
+                // jos halutaan näyttää esim. TextViewissä ja sen id on textView_temperature:
+                // binding.textViewTemperature.text = item.main?.temp.toString() + " C"
+                binding.textViewTemperature.text = item.main?.temp.toString() + " C"
             },
             Response.ErrorListener {
                 // typically this is a connection error
@@ -101,6 +98,8 @@ class CommentApiFragment : Fragment() {
         // if using this in an activity, use "this" instead of "context"
         val requestQueue = Volley.newRequestQueue(context)
         requestQueue.add(stringRequest)
+
+        Log.d("ADVTECH", JSON_URL)
     }
 
     override fun onDestroyView() {

@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.em_tuntiesimerkki1.databinding.FragmentDataReadBinding
 import com.example.em_tuntiesimerkki1.databinding.FragmentMapsBinding
 
@@ -105,7 +106,13 @@ class MapsFragment : Fragment(), GoogleMap.OnMarkerClickListener {
         Log.d("ADVTECH", p0.position.longitude.toString())
         Log.d("ADVTECH", p0.tag.toString())
 
+        // Navigate to CityWeatherFragment and pass coordinates
+        val action = MapsFragmentDirections.actionMapsFragmentToCityMarkerFragment(
+            p0.position.latitude.toFloat(), p0.position.longitude.toFloat()
+        )
+        findNavController().navigate(action)
+
         // onMarkerClick vaatii lopussa että palautetaan boolean
-        return false
+        return true
     }
 }

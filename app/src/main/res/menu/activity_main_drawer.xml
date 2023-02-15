@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
@@ -28,5 +29,9 @@
             android:id="@+id/mapsFragment"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/maps" />
+        <item
+            android:id="@+id/openStreetFragment"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/open_street_maps"/>
     </group>
 </menu>
