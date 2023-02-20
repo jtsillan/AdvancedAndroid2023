@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".FeedbackReadFragment">
+
+    <TextView
+        android:id="@+id/text_view_get_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="@string/get_data_from_server" />
+
+    <Button
+        android:id="@+id/button_fetch_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/fetch" />
+
+    <Button
+        android:id="@+id/button_post_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/post_data" />
+
+    <EditText
+        android:id="@+id/edit_text_user_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name" />
+
+    <TextView
+        android:id="@+id/text_view_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TestUser" />
+
+    <ListView
+        android:id="@+id/list_view_feekback_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

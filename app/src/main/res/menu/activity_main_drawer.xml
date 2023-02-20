@@ -33,5 +33,9 @@
             android:id="@+id/openStreetFragment"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/open_street_maps"/>
+        <item
+            android:id="@+id/feedbackReadFragment"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_directus"/>
     </group>
 </menu>

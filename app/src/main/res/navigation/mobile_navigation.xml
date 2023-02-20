@@ -86,4 +86,9 @@
         android:name="com.example.em_tuntiesimerkki1.OpenStreetFragment"
         android:label="fragment_open_street"
         tools:layout="@layout/fragment_open_street" />
+    <fragment
+        android:id="@+id/feedbackReadFragment"
+        android:name="com.example.em_tuntiesimerkki1.FeedbackReadFragment"
+        android:label="@string/directus_api_test"
+        tools:layout="@layout/fragment_feedback_read" />
 </navigation>
