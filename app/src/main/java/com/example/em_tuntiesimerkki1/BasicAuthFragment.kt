@@ -1,27 +1,22 @@
 package com.example.em_tuntiesimerkki1
 
-import android.content.Context
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import androidx.navigation.findNavController
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.example.em_tuntiesimerkki1.databinding.FragmentFeedbackReadBinding
-import com.example.em_tuntiesimerkki1.datatypes.feedback.Feedback
-import com.google.gson.GsonBuilder
-import org.json.JSONObject
+import com.example.em_tuntiesimerkki1.databinding.FragmentBasicAuthBinding
 
-class FeedbackReadFragment : Fragment() {
+class BasicAuthFragment : Fragment() {
     // change this to match your fragment name
-    private var _binding: FragmentFeedbackReadBinding? = null
+    private var _binding: FragmentBasicAuthBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -32,46 +27,24 @@ class FeedbackReadFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentFeedbackReadBinding.inflate(inflater, container, false)
+        _binding = FragmentBasicAuthBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        // the binding -object allows you to access views in the layout, textviews etc.
-        binding.buttonFetchData.setOnClickListener {
-            getFeedback()
-        }
+        getUsers()
 
-        binding.buttonSendFeedbackFragment.setOnClickListener {
-            val action = FeedbackReadFragmentDirections.actionFeedbackReadFragmentToFeedBackSendFragment()
-            it.findNavController().navigate(action)
-        }
+        // the binding -object allows you to access views in the layout, textviews etc.
 
         return root
     }
 
-    var feedbacks : List<Feedback> = emptyList()
-
-
-    private fun getFeedback() {
+    private fun getUsers() {
         // this is the url where we want to get our data from
-        val JSON_URL = "https://easnygvt.directus.app/items/feedback?access_token=${BuildConfig.DIRECTUS_ACCESS_TOKEN}"
-
-        val gson = GsonBuilder().setPrettyPrinting().create()
+        val JSON_URL = "https://apingweb.com/api/auth/users"
 
         // Request a string response from the provided URL.
         val stringRequest: StringRequest = object : StringRequest(
             Request.Method.GET, JSON_URL,
             Response.Listener { response ->
-                val jsonObject = JSONObject(response)
-                val jsonArray = jsonObject.getJSONArray("data")
-
-                feedbacks = gson.fromJson(jsonArray.toString(), Array<Feedback>::class.java).toList()
-
-                for (item in feedbacks) {
-                    Log.d("ADVTECH", item.name.toString())
-                }
-
-                val adapter = ArrayAdapter(context as Context, android.R.layout.simple_list_item_1, feedbacks)
-                binding.listViewFeekbackDetail.adapter = adapter
 
                 // print the response as a whole
                 // we can use GSON to modify this response into something more usable
@@ -90,6 +63,15 @@ class FeedbackReadFragment : Fragment() {
                 val headers = HashMap<String, String>()
                 headers["Accept"] = "application/json"
                 headers["Content-Type"] = "application/json; charset=utf-8"
+
+                // replace with your own API's login info
+                val authorizationString = "Basic " + Base64.encodeToString(
+                    ("admin" + ":" + "12345").toByteArray(), Base64.DEFAULT
+                )
+
+                Log.d("TESTI", authorizationString)
+
+                headers.put("Authorization", authorizationString);
                 return headers
             }
         }

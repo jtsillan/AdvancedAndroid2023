@@ -27,4 +27,12 @@
     <string name="get_data_from_server">Haetaan dataa serveriltä!</string>
     <string name="fetch">fetch!</string>
     <string name="post_data">post data!</string>
+    <string name="send_us_feedback">Send us feedback!</string>
+    <string name="your_name">Your name</string>
+    <string name="write_your_name">Write your name</string>
+    <string name="your_location">Your location</string>
+    <string name="where_are_you">Where are you?</string>
+    <string name="your_feedback">Your feedback</string>
+    <string name="how_did_we_do_today">How did we do today?</string>
+    <string name="send_feedback">Send feedback</string>
 </resources>

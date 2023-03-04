@@ -90,5 +90,28 @@
         android:id="@+id/feedbackReadFragment"
         android:name="com.example.em_tuntiesimerkki1.FeedbackReadFragment"
         android:label="@string/directus_api_test"
-        tools:layout="@layout/fragment_feedback_read" />
+        tools:layout="@layout/fragment_feedback_read" >
+        <action
+            android:id="@+id/action_feedbackReadFragment_to_feedBackSendFragment"
+            app:destination="@id/feedBackSendFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/feedBackSendFragment"
+        android:name="com.example.em_tuntiesimerkki1.FeedBackSendFragment"
+        android:label="fragment_feed_back_send"
+        tools:layout="@layout/fragment_feed_back_send" >
+        <action
+            android:id="@+id/action_feedBackSendFragment_to_feedbackReadFragment"
+            app:destination="@id/feedbackReadFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/basicAuthFragment"
+        android:name="com.example.em_tuntiesimerkki1.BasicAuthFragment"
+        android:label="fragment_basic_auth"
+        tools:layout="@layout/fragment_basic_auth" />
+    <fragment
+        android:id="@+id/tempAccessFragment"
+        android:name="com.example.em_tuntiesimerkki1.TempAccessFragment"
+        android:label="fragment_temp_access"
+        tools:layout="@layout/fragment_temp_access" />
 </navigation>

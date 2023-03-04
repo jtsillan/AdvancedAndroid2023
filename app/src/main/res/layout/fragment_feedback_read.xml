@@ -21,24 +21,10 @@
         android:text="@string/fetch" />
 
     <Button
-        android:id="@+id/button_post_data"
+        android:id="@+id/button_send_feedback_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/post_data" />
-
-    <EditText
-        android:id="@+id/edit_text_user_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
-
-    <TextView
-        android:id="@+id/text_view_user"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TestUser" />
 
     <ListView
         android:id="@+id/list_view_feekback_detail"
