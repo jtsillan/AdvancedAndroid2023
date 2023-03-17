@@ -114,4 +114,9 @@
         android:name="com.example.em_tuntiesimerkki1.TempAccessFragment"
         android:label="fragment_temp_access"
         tools:layout="@layout/fragment_temp_access" />
+    <fragment
+        android:id="@+id/weatherStationFragment"
+        android:name="com.example.em_tuntiesimerkki1.WeatherStationFragment"
+        android:label="fragment_weather_station"
+        tools:layout="@layout/fragment_weather_station" />
 </navigation>

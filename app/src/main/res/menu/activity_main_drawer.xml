@@ -45,5 +45,9 @@
             android:id="@+id/tempAccessFragment"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Temp Access"/>
+        <item
+            android:id="@+id/weatherStationFragment"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Weather Station"/>
     </group>
 </menu>

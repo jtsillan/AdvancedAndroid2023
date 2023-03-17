@@ -35,4 +35,5 @@
     <string name="your_feedback">Your feedback</string>
     <string name="how_did_we_do_today">How did we do today?</string>
     <string name="send_feedback">Send feedback</string>
+    <string name="waiting_for_data">WAITING FOR DATA</string>
 </resources>
