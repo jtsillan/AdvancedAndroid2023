@@ -9,11 +9,6 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import com.example.em_tuntiesimerkki1.databinding.FragmentDataReadBinding
 
-/**
- * A simple [Fragment] subclass.
- * Use the [DataReadFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DataReadFragment : Fragment() {
     // change this to match your fragment name
     private var _binding: FragmentDataReadBinding? = null

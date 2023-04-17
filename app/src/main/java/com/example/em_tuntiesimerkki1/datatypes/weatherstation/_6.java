@@ -11,17 +11,17 @@ public class _6 {
     @SerializedName("v")
     @Expose
     // voi joutua vaihtaa doubleiksi jos tulee bugi
-    private int v;
+    private double v;
 
-    public int getV() {
+    public double getV() {
         return v;
     }
 
-    public void setV(int v) {
+    public void setV(double v) {
         this.v = v;
     }
 
-    public _6 withV(int v) {
+    public _6 withV(double v) {
         this.v = v;
         return this;
     }

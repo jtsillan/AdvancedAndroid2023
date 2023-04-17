@@ -12,17 +12,18 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.example.em_tuntiesimerkki1.databinding.FragmentCommentApiBinding
+import com.example.em_tuntiesimerkki1.databinding.FragmentTodoItemBinding
 import com.example.em_tuntiesimerkki1.datatypes.comment.Comment
+import com.example.em_tuntiesimerkki1.datatypes.todoitem.TodoItem
 import com.google.gson.GsonBuilder
 
-class CommentApiFragment : Fragment() {
+class TodoItemFragment : Fragment() {
     // change this to match your fragment name
-    private var _binding: FragmentCommentApiBinding? = null
+    private var _binding: FragmentTodoItemBinding? = null
 
     // alustetaan viittaus adapteriin sekä luodaan LinearLayoutManager
     // RecyclerView tarvitsee jonkin LayoutManagerin, joista yksinkertaisin on Linear
-    private lateinit var adapter: CommentAdapter
+    private lateinit var adapter: TodoAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
 
     // This property is only valid between onCreateView and
@@ -34,7 +35,7 @@ class CommentApiFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentCommentApiBinding.inflate(inflater, container, false)
+        _binding = FragmentTodoItemBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         // Luodaan layout manager ja kytketään se ulkoasun recyclerview
@@ -42,16 +43,17 @@ class CommentApiFragment : Fragment() {
         binding.recyclerView.layoutManager = linearLayoutManager
 
         // the binding -object allows you to access views in the layout, textviews etc.
-        binding.buttonGetComments.setOnClickListener {
-            getComments()
+
+        binding.buttonGetData.setOnClickListener {
+            getTodoComments()
         }
 
         return root
     }
 
-    private fun getComments() {
+    private fun getTodoComments() {
         // this is the url where we want to get our data from
-        val JSON_URL = "https://jsonplaceholder.typicode.com/comments"
+        val JSON_URL = "https://jsonplaceholder.typicode.com/todos"
         // Alustetaan GSON
         val gson = GsonBuilder().setPrettyPrinting().create()
 
@@ -64,15 +66,15 @@ class CommentApiFragment : Fragment() {
                 // we can use GSON to modify this response into something more usable
                 //Log.d("ADVTECH", response)
                 // Muutetaan raaka-JSON rajapinnasta (responce) GSON:n avulla listaksi Comment-objektiksi
-                var rows : List<Comment> = gson.fromJson(response, Array<Comment>::class.java).toList()
+                var rows : List<TodoItem> = gson.fromJson(response, Array<TodoItem>::class.java).toList()
 
                 // if the fetched data (Valley/GSON) is in varible "rows", we can set the data like this:
-                adapter = CommentAdapter(rows)
+                adapter = TodoAdapter(rows)
                 binding.recyclerView.adapter = adapter
 
-                // Tulostetaan silmukassa jokaisen kommentin email-osoite
-                for (item : Comment in rows) {
-                    Log.d("ADVTECT", item.email.toString())
+                // Print every todoItem title
+                for (item in rows) {
+                    Log.d("ADVTECT", "Title: " + item.title.toString())
                 }
 
             },

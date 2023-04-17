@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    android:orientation="vertical"
+    tools:context=".TodoDetailFragment">
+
+    <TextView
+        android:id="@+id/textView6"
+        android:text="userId:"
+        style="@style/todo_detail_item_row_header" />
+
+    <TextView
+        android:id="@+id/text_view_user_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/textView8"
+        style="@style/todo_detail_item_row_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="id:" />
+
+    <TextView
+        android:id="@+id/text_view_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/textView10"
+        style="@style/todo_detail_item_row_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="title:" />
+
+    <TextView
+        android:id="@+id/text_view_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/textView12"
+        style="@style/todo_detail_item_row_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="completed:" />
+
+    <TextView
+        android:id="@+id/text_view_completed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

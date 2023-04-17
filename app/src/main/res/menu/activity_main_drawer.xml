@@ -10,25 +10,13 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/menu_home" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/todoFragment"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
-        <item
-            android:id="@+id/dataReadFragment"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/data_read_test" />
-        <item
-            android:id="@+id/commentApiFragment"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/api" />
+            android:title="@string/todo"/>
         <item
             android:id="@+id/mapsFragment"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/maps" />
+            android:title="@string/google_maps"/>
         <item
             android:id="@+id/openStreetFragment"
             android:icon="@drawable/ic_menu_slideshow"
@@ -38,16 +26,36 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_directus"/>
         <item
+            android:id="@+id/weatherStationFragment"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/weather_station"/>
+        <item
+            android:id="@+id/dataReadFragment"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/data_read_test" />
+        <item
+            android:id="@+id/commentApiFragment"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/api" />
+        <item
             android:id="@+id/basicAuthFragment"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Basic Auth"/>
+            android:title="@string/basic_auth"/>
         <item
             android:id="@+id/tempAccessFragment"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Temp Access"/>
+            android:title="@string/temp_access"/>
         <item
-            android:id="@+id/weatherStationFragment"
+            android:id="@+id/cloudMqttFragment"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Weather Station"/>
+            android:title="@string/hive_mqtt"/>
+        <item
+            android:id="@+id/customViewTestFragment"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/custom_view_test"/>
+        <item
+            android:id="@+id/chartFragment"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/chart"/>
     </group>
 </menu>

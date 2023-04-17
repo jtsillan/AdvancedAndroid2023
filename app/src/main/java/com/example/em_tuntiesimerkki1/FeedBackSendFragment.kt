@@ -40,7 +40,7 @@ class FeedBackSendFragment : Fragment() {
             var location = binding.editTextLocation.text.toString()
             var value = binding.editTextFeedbackValue.text.toString()
 
-            Log.d("TESTI", "${name} - ${location} - ${value}")
+            Log.d("TESTI", "$name - $location - $value")
 
             sendFeedback(name, location, value)
         }
@@ -52,13 +52,13 @@ class FeedBackSendFragment : Fragment() {
 
     // Apufunktion, jonka kautta uusi feedback lähetetaan Volleyllä
     fun sendFeedback(name: String, location: String, value: String) {
-        val JSON_URL = "https://easnygvt.directus.app/items/feedback?access_token=${BuildConfig.DIRECTUS_ACCESS_TOKEN}"
+        val JSON_URL = "http://10.0.2.2:8055/items/feedback?access_token=${BuildConfig.DIRECTUS_ACCESS_TOKEN}"
 
         var gson = GsonBuilder().create();
 
         // Request a string response from the provided URL.
         val stringRequest: StringRequest = object : StringRequest(
-            Request.Method.POST, JSON_URL,
+            Method.POST, JSON_URL,
             Response.Listener { response ->
                 // usually APIs return the added new data back
                 // when sending new data

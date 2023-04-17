@@ -6,22 +6,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.em_tuntiesimerkki1.databinding.FragmentWeatherStationBinding
-import com.example.em_tuntiesimerkki1.datatypes.weatherstation.WeatherStation
+import com.example.em_tuntiesimerkki1.databinding.FragmentCloudMqttBinding
 import com.google.gson.GsonBuilder
 import com.hivemq.client.mqtt.MqttClient
 import com.hivemq.client.mqtt.mqtt3.Mqtt3AsyncClient
 import com.hivemq.client.mqtt.mqtt3.message.connect.connack.Mqtt3ConnAck
-import java.text.SimpleDateFormat
-import java.util.*
+import kotlin.random.Random
 
-class WeatherStationFragment : Fragment() {
+class CloudMqttFragment : Fragment() {
 
     // HiveHQ MQTT version 3 -client
     private lateinit var client: Mqtt3AsyncClient
 
     // change this to match your fragment name
-    private var _binding: FragmentWeatherStationBinding? = null
+    private var _binding: FragmentCloudMqttBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -32,38 +30,48 @@ class WeatherStationFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentWeatherStationBinding.inflate(inflater, container, false)
+        _binding = FragmentCloudMqttBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        // the binding -object allows you to access views in the layout, textviews etc.
 
         // version 3, IBM Cloud, weather station
         client = MqttClient.builder()
             .useMqttVersion3()
             .sslWithDefaultConfig()
-            .identifier(BuildConfig.MQTT_CLIENT + UUID.randomUUID().toString())
-            .serverHost(BuildConfig.MQTT_BROKER)
+            .identifier(BuildConfig.HIVE_MQTT_CLIENT)
+            .serverHost(BuildConfig.HIVE_MQTT_BROKER)
             .serverPort(8883)
             .buildAsync()
 
-
         client.connectWith()
             .simpleAuth()
-            .username(BuildConfig.MQTT_USERNAME)
-            .password(BuildConfig.MQTT_PASSWORD.toByteArray())
+            .username(BuildConfig.HIVE_MQTT_USERNAME)
+            .password(BuildConfig.HIVE_MQTT_PASSWORD.toByteArray())
             .applySimpleAuth()
             .send()
             .whenComplete { connAck: Mqtt3ConnAck?, throwable: Throwable? ->
                 if (throwable != null) {
                     Log.d("ADVTECH", "Connection failure.")
+                    Log.d("ADVTECH", throwable.message.toString())
                 } else {
                     // Setup subscribes or start publishing
                     subscribeToTopic()
                 }
             }
 
+        binding.buttonSendMessage.setOnClickListener {
+            var randomNumber = Random.nextInt(0, 100)
+            var stringPayload = "Hello World! $randomNumber"
+
+            client.publishWith()
+                .topic(BuildConfig.HIVE_MQTT_TOPIC)
+                .payload(stringPayload.toByteArray())
+                .send()
+        }
+
         return root
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -76,7 +84,7 @@ class WeatherStationFragment : Fragment() {
         val gson = GsonBuilder().setPrettyPrinting().create()
 
         client.subscribeWith()
-            .topicFilter(BuildConfig.MQTT_TOPIC)
+            .topicFilter(BuildConfig.HIVE_MQTT_TOPIC)
             .callback { publish ->
 
                 // this callback runs everytime your code receives new data payload
@@ -84,32 +92,13 @@ class WeatherStationFragment : Fragment() {
                 Log.d("ADVTECH", result)
 
                 try {
-
-                    var item: WeatherStation = gson.fromJson(result, WeatherStation::class.java)
-
-                    var temperature = item.d.get1().v.toString()
-                    var pressure = item.d.get2().v.toString()
-
-                    var output = "Temperature: $temperature C\nPressure: $pressure hPa"
-
-                    var temperatureValue = item.d.get1().v.toFloat()
-
-                    var timeStamp = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())
-                    var text = "$timeStamp - Temperature: ${temperatureValue}℃, Humidity: ${item.d.get3().v.toFloat()}%"
-
-                    // Ajetaan ulkoasuun liittyvät asiat UI-säikeessä
-                    // älä laita ui-threadiin mitää lisää taukkaa, muuten tulee ongelmia
-                    activity?.runOnUiThread(java.lang.Runnable {
-                        binding.textViewWeatherData.text = output
-                        binding.speedView.speedTo(temperatureValue)
-                        binding.latestDataTestView.addData(text)
-                    })
-
+                    activity?.runOnUiThread {
+                        binding.textViewMessage.text = result
+                    }
                 }
-                catch (e: java.lang.Exception){
-                    Log.d("ADVTECH", "Skipped diagnostics payloads.")
+                catch (e: Exception) {
+                    Log.d("ADVTECH", "VIRHE" + e.message.toString())
                 }
-
 
             }
             .send()

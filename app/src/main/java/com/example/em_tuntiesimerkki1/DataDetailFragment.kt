@@ -9,16 +9,11 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.example.em_tuntiesimerkki1.databinding.FragmentDataDetailBinding
 
-/**
- * A simple [Fragment] subclass.
- * Use the [DataDetailFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DataDetailFragment : Fragment() {
     // change this to match your fragment name
     private var _binding: FragmentDataDetailBinding? = null
 
-    val args: DataDetailFragmentArgs by navArgs()
+    private val args: DataDetailFragmentArgs by navArgs()
 
     // This property is only valid between onCreateView and
     // onDestroyView.

@@ -9,16 +9,12 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.example.em_tuntiesimerkki1.databinding.FragmentApiDetailBinding
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ApiDetailFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class ApiDetailFragment : Fragment() {
     // change this to match your fragment name
     private var _binding: FragmentApiDetailBinding? = null
 
-    val args: ApiDetailFragmentArgs by navArgs()
+    private val args: ApiDetailFragmentArgs by navArgs()
 
     // This property is only valid between onCreateView and
     // onDestroyView.

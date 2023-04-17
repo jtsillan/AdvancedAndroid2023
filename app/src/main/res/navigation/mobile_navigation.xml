@@ -63,8 +63,8 @@
     <fragment
         android:id="@+id/mapsFragment"
         android:name="com.example.em_tuntiesimerkki1.MapsFragment"
-        android:label="fragment_maps"
-        tools:layout="@layout/fragment_maps" >
+        android:label="Google Maps"
+        tools:layout="@layout/fragment_maps">
         <action
             android:id="@+id/action_mapsFragment_to_cityMarkerFragment"
             app:destination="@id/cityMarkerFragment" />
@@ -84,7 +84,7 @@
     <fragment
         android:id="@+id/openStreetFragment"
         android:name="com.example.em_tuntiesimerkki1.OpenStreetFragment"
-        android:label="fragment_open_street"
+        android:label="Open Street Maps"
         tools:layout="@layout/fragment_open_street" />
     <fragment
         android:id="@+id/feedbackReadFragment"
@@ -117,6 +117,40 @@
     <fragment
         android:id="@+id/weatherStationFragment"
         android:name="com.example.em_tuntiesimerkki1.WeatherStationFragment"
-        android:label="fragment_weather_station"
+        android:label="Weather Station"
         tools:layout="@layout/fragment_weather_station" />
+    <fragment
+        android:id="@+id/cloudMqttFragment"
+        android:name="com.example.em_tuntiesimerkki1.CloudMqttFragment"
+        android:label="fragment_cloud_mqtt"
+        tools:layout="@layout/fragment_cloud_mqtt" />
+    <fragment
+        android:id="@+id/customViewTestFragment"
+        android:name="com.example.em_tuntiesimerkki1.CustomViewTestFragment"
+        android:label="fragment_custom_view_test"
+        tools:layout="@layout/fragment_custom_view_test" />
+    <fragment
+        android:id="@+id/chartFragment"
+        android:name="com.example.em_tuntiesimerkki1.ChartFragment"
+        android:label="fragment_chart"
+        tools:layout="@layout/fragment_chart" />
+    <fragment
+        android:id="@+id/todoFragment"
+        android:name="com.example.em_tuntiesimerkki1.TodoItemFragment"
+        android:label="Todo Access"
+        tools:layout="@layout/fragment_todo_item">
+        <action
+            android:id="@+id/action_todoFragment_to_todoDetailFragment"
+            app:destination="@id/todoDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/todoDetailFragment"
+        android:name="com.example.em_tuntiesimerkki1.TodoDetailFragment"
+        android:label="fragment_todo_detail"
+        tools:layout="@layout/fragment_todo_detail" >
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
 </navigation>

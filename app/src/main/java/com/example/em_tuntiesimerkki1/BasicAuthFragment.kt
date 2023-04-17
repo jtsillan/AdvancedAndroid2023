@@ -71,7 +71,7 @@ class BasicAuthFragment : Fragment() {
 
                 Log.d("TESTI", authorizationString)
 
-                headers.put("Authorization", authorizationString);
+                headers["Authorization"] = authorizationString;
                 return headers
             }
         }

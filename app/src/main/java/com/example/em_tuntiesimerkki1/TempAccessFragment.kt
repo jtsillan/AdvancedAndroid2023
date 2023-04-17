@@ -18,11 +18,11 @@ import java.io.UnsupportedEncodingException
 
 class TempAccessFragment : Fragment() {
     // VARIABLES USED BY THE SESSION MANAGEMENT
-    val LOGIN_URL = "https://easnygvt.directus.app/auth/login"
+    val LOGIN_URL = "http://10.0.2.2:8055/auth/login"
 
     // these should be placed in the local properties file and used by BuildConfig
     // JSON_URL should be WITHOUT a trailing slash (/)!
-    val JSON_URL = "https://easnygvt.directus.app/items/feedback"
+    val JSON_URL = "http://10.0.2.2:8055/items/feedback"
 
     // Using username + password in Directus
     val userName = BuildConfig.DIRECTUS_NEW_USER_USERNAME
@@ -104,7 +104,7 @@ class TempAccessFragment : Fragment() {
 
     // REQUEST OBJECT 1: LOGIN
     var loginRequest: StringRequest = object : StringRequest(
-        Request.Method.POST, LOGIN_URL,
+        Method.POST, LOGIN_URL,
         Response.Listener { response ->
 
             var responseJSON: JSONObject = JSONObject(response)
@@ -161,7 +161,7 @@ class TempAccessFragment : Fragment() {
 
     // REQUEST OBJECT 3 : ACTUAL DATA -> FEEDBACK
     private var dataRequest: StringRequest = object : StringRequest(
-        Request.Method.GET, JSON_URL,
+        Method.GET, JSON_URL,
         Response.Listener { response ->
             Log.d("ADVTECH", response)
         },

@@ -53,7 +53,7 @@ class FeedbackReadFragment : Fragment() {
 
     private fun getFeedback() {
         // this is the url where we want to get our data from
-        val JSON_URL = "https://easnygvt.directus.app/items/feedback?access_token=${BuildConfig.DIRECTUS_ACCESS_TOKEN}"
+        val JSON_URL = "http://10.0.2.2:8055/items/feedback?access_token=${BuildConfig.DIRECTUS_ACCESS_TOKEN}"
 
         val gson = GsonBuilder().setPrettyPrinting().create()
 

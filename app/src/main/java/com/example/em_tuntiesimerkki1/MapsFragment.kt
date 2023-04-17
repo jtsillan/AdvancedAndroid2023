@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.example.em_tuntiesimerkki1.databinding.FragmentDataReadBinding
 import com.example.em_tuntiesimerkki1.databinding.FragmentMapsBinding
 
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -21,12 +20,16 @@ import com.google.android.gms.maps.model.MarkerOptions
 
 class MapsFragment : Fragment(), GoogleMap.OnMarkerClickListener {
 
-    // change this to match your fragment name
+    // Bing the fragment
     private var _binding: FragmentMapsBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    // Access GoogleMaps -object
+    private lateinit var gMap : GoogleMap
+
 
     private val callback = OnMapReadyCallback { googleMap ->
         /**
@@ -57,9 +60,6 @@ class MapsFragment : Fragment(), GoogleMap.OnMarkerClickListener {
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(rovaniemi, 15f))
     }
 
-    // Jotta pääsemme GoogleMaps-objektiin käsiksi myöhemmin
-    private lateinit var gMap : GoogleMap
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -87,6 +87,7 @@ class MapsFragment : Fragment(), GoogleMap.OnMarkerClickListener {
                 gMap.mapType = GoogleMap.MAP_TYPE_HYBRID
             }
         }
+
         return root
     }
 

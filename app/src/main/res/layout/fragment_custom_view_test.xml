@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="5dp"
+    tools:context=".CustomViewTestFragment">
+
+    <com.example.em_tuntiesimerkki1.CustomTemperatureView
+        android:id="@+id/custom_temperature"
+        android:layout_width="120dp"
+        android:layout_height="120dp" />
+
+    <Button
+        android:id="@+id/button_change_temperature"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CHANGE TEMPERATURE" />
+
+    <com.example.em_tuntiesimerkki1.LatestDataView
+        android:id="@+id/latest_data_test_view"
+        android:layout_width="match_parent"
+        android:background="@drawable/customborder"
+        android:padding="5dp"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/button_add_test_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ADD MESSAGE" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_launcher_foreground" />
+
+
+</LinearLayout>
