@@ -10,7 +10,6 @@
         android:id="@+id/image_view_arrow"
         android:layout_width="30dp"
         android:layout_height="24dp"
-        android:layout_marginStart="8dp"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/text_view_todo_title"
@@ -21,7 +20,7 @@
         android:layout_width="28dp"
         android:layout_height="25dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.767"
+        app:layout_constraintHorizontal_bias="0.994"
         app:layout_constraintStart_toEndOf="@+id/image_view_arrow"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/check_box_ok" />

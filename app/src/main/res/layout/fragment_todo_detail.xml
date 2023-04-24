@@ -9,11 +9,11 @@
 
     <TextView
         android:id="@+id/textView6"
-        android:text="userId:"
-        style="@style/todo_detail_item_row_header" />
+        style="@style/todo_detail_item_row_header"
+        android:text="userName:" />
 
     <TextView
-        android:id="@+id/text_view_user_id"
+        android:id="@+id/text_view_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

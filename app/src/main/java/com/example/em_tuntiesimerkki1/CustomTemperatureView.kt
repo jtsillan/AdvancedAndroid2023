@@ -32,11 +32,25 @@ class CustomTemperatureView  @JvmOverloads constructor(
     fun changeTemperature(temp :Int) {
         temperature = temp
 
-        if (temperature > 0) {
-            paint.color = Color.RED
+        if (temperature in -30..-20) {
+            paint.color = Color.BLUE
+            textPaint.color = Color.WHITE
+        }
+        else if (temperature in -19..-10) {
+            paint.color = Color.argb(255,0,138,255)
+            textPaint.color = Color.WHITE
+        }
+        else if (temperature in -9..10) {
+            paint.color = Color.YELLOW
+            textPaint.color = Color.BLACK
+        }
+        else if (temperature in 11..20) {
+            paint.color = Color.argb(255, 255, 85,0)
+            textPaint.color = Color.BLACK
         }
         else {
-            paint.color = Color.BLUE
+            paint.color = Color.RED
+            textPaint.color = Color.BLACK
         }
 
         // Value changed, draw layout again
@@ -54,10 +68,10 @@ class CustomTemperatureView  @JvmOverloads constructor(
         canvas.drawCircle(width.toFloat() / 2, width.toFloat() / 2, width.toFloat() / 2, paint)
 
         // parameters: content, x, y, color
-        canvas.drawText("${temperature}℃", width.toFloat() / 2, width.toFloat() / 2 + 25, textPaint);
+        canvas.drawText("${temperature}℃", width.toFloat() / 2, width.toFloat() / 2 + 25, textPaint)
     }
 
-    // If layout has no
+    // If layout has no set value
     private var size = 200
 
     // Important component!!
@@ -65,7 +79,7 @@ class CustomTemperatureView  @JvmOverloads constructor(
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         // Try for a width based on our minimum
         val minw: Int = paddingLeft + paddingRight + suggestedMinimumWidth
-        var w: Int = View.resolveSizeAndState(minw, widthMeasureSpec, 1)
+        var w: Int = resolveSizeAndState(minw, widthMeasureSpec, 1)
 
         // if no exact size given (either dp or match_parent)
         // use this one instead as default (wrap_content)
@@ -78,8 +92,8 @@ class CustomTemperatureView  @JvmOverloads constructor(
         // get as big as it can
         // val minh: Int = View.MeasureSpec.getSize(w) + paddingBottom + paddingTop
         // in this case, we use the height the same as our width, since it's a circle
-        val h: Int = View.resolveSizeAndState(
-            View.MeasureSpec.getSize(w),
+        val h: Int = resolveSizeAndState(
+            MeasureSpec.getSize(w),
             heightMeasureSpec,
             0
         )

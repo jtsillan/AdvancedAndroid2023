@@ -18,16 +18,15 @@ import com.example.em_tuntiesimerkki1.datatypes.todoitem.TodoItem
 import com.google.gson.GsonBuilder
 
 class TodoItemFragment : Fragment() {
-    // change this to match your fragment name
+
     private var _binding: FragmentTodoItemBinding? = null
 
-    // alustetaan viittaus adapteriin sekä luodaan LinearLayoutManager
-    // RecyclerView tarvitsee jonkin LayoutManagerin, joista yksinkertaisin on Linear
+    // Initialize reference to adapter and create LinearLayoutManager
+    // RecyclerView needs some LayoutManager, simplest is Linear
     private lateinit var adapter: TodoAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    // This property is only valid between onCreateView and onDestroyView
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -38,12 +37,11 @@ class TodoItemFragment : Fragment() {
         _binding = FragmentTodoItemBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        // Luodaan layout manager ja kytketään se ulkoasun recyclerview
+        // Create layout manager and bind its view to recyclerview
         linearLayoutManager = LinearLayoutManager(context)
         binding.recyclerView.layoutManager = linearLayoutManager
 
-        // the binding -object allows you to access views in the layout, textviews etc.
-
+        // Get data from url
         binding.buttonGetData.setOnClickListener {
             getTodoComments()
         }
@@ -51,24 +49,25 @@ class TodoItemFragment : Fragment() {
         return root
     }
 
+    // Get all todoItem comments from url
     private fun getTodoComments() {
         // this is the url where we want to get our data from
         val JSON_URL = "https://jsonplaceholder.typicode.com/todos"
-        // Alustetaan GSON
+
+        // Initialize GSON
         val gson = GsonBuilder().setPrettyPrinting().create()
 
         // Request a string response from the provided URL.
         val stringRequest: StringRequest = object : StringRequest(
-            Request.Method.GET, JSON_URL,
+            Method.GET, JSON_URL,
             Response.Listener { response ->
 
                 // print the response as a whole
                 // we can use GSON to modify this response into something more usable
-                //Log.d("ADVTECH", response)
-                // Muutetaan raaka-JSON rajapinnasta (responce) GSON:n avulla listaksi Comment-objektiksi
+                // Change raw-JSON from interface (response) with GSON to list of TodoItem objects
                 var rows : List<TodoItem> = gson.fromJson(response, Array<TodoItem>::class.java).toList()
 
-                // if the fetched data (Valley/GSON) is in varible "rows", we can set the data like this:
+                // if the fetched data (Valley/GSON) is in variable "rows", we can set the data like this:
                 adapter = TodoAdapter(rows)
                 binding.recyclerView.adapter = adapter
 

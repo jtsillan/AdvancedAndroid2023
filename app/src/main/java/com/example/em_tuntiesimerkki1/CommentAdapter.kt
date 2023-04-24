@@ -11,78 +11,69 @@ import com.example.em_tuntiesimerkki1.datatypes.comment.Comment
 
 class CommentAdapter(private val comments: List<Comment>) : RecyclerView.Adapter<CommentAdapter.CommentHolder>() {
 
-    // binding layerin muuttujien alustaminen
+    // Initialize variables for binding layer
     private var _binding: RecyclerviewItemRowBinding? = null
     private val binding get() = _binding!!
 
-    // ViewHolderin onCreate-metodi. käytännössä tässä kytketään binding layer
-    // osaksi CommentHolder-luokkaan (adapterin sisäinen luokka)
-    // koska CommentAdapter pohjautuu RecyclerViewin perusadapteriin, täytyy tästä
-    // luokasta löytyä metodi nimeltä onCreateViewHolder
+    // ViewHolder onCreate method, binds binding layer part of CommentHolder -class
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentHolder {
-        // binding layerina toimii yksitätinen recyclerview_item_row.xml -instanssi
+        // Single recyclerview_item_row.xml instance works as a binging layer
         _binding = RecyclerviewItemRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CommentHolder(binding)
     }
 
-    // tämä metodi kytkee yksittäisen Comment-objektin yksittäisen CommentHolder-instanssiin
-    // koska CommentAdapter pohjautuu RecyclerViewin perusadapteriin, täytyy tästä
-    // luokasta löytyä metodi nimeltä onBindViewHolder
+    // Binds single Comment-object to CommentHolder instance
     override fun onBindViewHolder(holder: CommentHolder, position: Int) {
         val itemComment = comments[position]
         holder.bindComment(itemComment)
     }
 
-    // Adapterin täytyy pysty tietämään sisältämänsä datan koko tämän metodin avulla
-    // koska CommentAdapter pohjautuu RecyclerViewin perusadapteriin, täytyy tästä
-    // luokasta löytyä metodi nimeltä getItemCount
+    // Adapter most know its size, mandatory class item
     override fun getItemCount(): Int {
         return comments.size
     }
 
-    // CommentHolder, joka määritettiin oman CommentAdapterin perusmäärityksessä (ks. luokan yläosa)
-    // Holder-luokka sisältää logiikan, jolla data ja ulkoasu kytketään toisiinsa
+    // Defines logic which binds the view and data together
     class CommentHolder(v: RecyclerviewItemRowBinding) : RecyclerView.ViewHolder(v.root), View.OnClickListener {
 
-        // tämän kommentin ulkoasu ja varsinainen data
+        // Variables for view and data
         private var view: RecyclerviewItemRowBinding = v
         private var comment: Comment? = null
 
-        // mahdollistetaan yksittäisen itemin klikkaaminen tässä luokassa
+        // Enables single item click in this class
         init {
             v.root.setOnClickListener(this)
         }
 
-        // metodi, joka kytkee datan yksityiskohdat ulkoasun yksityiskohtiin
+        // Method that binds data details to view details
         fun bindComment(comment: Comment) {
-            // otetaan kommentti talteen ylätasolla, että voimme käyttää sitä myös esim. onClick
+            // Define comment for this method
             this.comment = comment
 
-            // Tallennetaan kommentin nimi Stringiksi
+            // Save comment name as string
             var commentName : String = comment.name as String
 
-            // Jos kemmentin pituus on yli 20 merkkiä, lyhennetään 20:een merkkiin
-            // ja lisätään kolme pistettä
+            // If comment name is longer that 20 signs, shorten and add "..."
             if(commentName.length > 20) {
                 commentName = commentName.substring(0, 20) + "..."
             }
 
-            // oli kommentin nimi mitä tahansa, asetetaan se käyttöliittymään
+            // Set comment name to text view
             view.textViewCommentName.text = commentName
 
-            // asetetaan muut tiedot ulkoasuun
+            // Set other details to ui
             view.textViewCommentEmail.text = comment.email
             view.textViewCommentBody.text = comment.body
         }
 
-        // jos itemiä klikataan käyttöliittymässä, ajetaan tämä koodi
+        // Method to run when single short click is made
         override fun onClick(v: View) {
             Log.d("ADVTECH", "RecyclerView clicked!!!" + comment?.id.toString())
 
-            // muutetaan Int? => Int
+            // Cast comment id to Int
             val commentId = comment?.id as Int
 
-            // navigoidaan ApiFragmentista --> ApiDetailFragment, parametrina kommentin id
+            // Navigate to ApiDetailFragment, comment id as parameter
             val action = CommentApiFragmentDirections.actionCommentApiFragmentToApiDetailFragment(commentId)
             v.findNavController().navigate(action)
         }

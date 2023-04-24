@@ -37,6 +37,9 @@ class WeatherStationFragment : Fragment() {
 
         // the binding -object allows you to access views in the layout, textviews etc.
 
+        binding.speedView.visibility = View.GONE
+        binding.latestDataTestView.visibility = View.GONE
+
         // version 3, IBM Cloud, weather station
         client = MqttClient.builder()
             .useMqttVersion3()
@@ -80,14 +83,14 @@ class WeatherStationFragment : Fragment() {
             .callback { publish ->
 
                 // this callback runs everytime your code receives new data payload
-                var result = String(publish.getPayloadAsBytes())
+                var result = String(publish.payloadAsBytes)
                 Log.d("ADVTECH", result)
 
                 try {
 
-                    var item: WeatherStation = gson.fromJson(result, WeatherStation::class.java)
+                    val item: WeatherStation = gson.fromJson(result, WeatherStation::class.java)
 
-                    var temperature = item.d.get1().v.toString()
+                    val temperature = item.d.get1().v.toString()
                     var pressure = item.d.get2().v.toString()
 
                     var output = "Temperature: $temperature C\nPressure: $pressure hPa"
@@ -100,11 +103,16 @@ class WeatherStationFragment : Fragment() {
                     // Ajetaan ulkoasuun liittyvät asiat UI-säikeessä
                     // älä laita ui-threadiin mitää lisää taukkaa, muuten tulee ongelmia
                     activity?.runOnUiThread(java.lang.Runnable {
-                        binding.textViewWeatherData.text = output
-                        binding.speedView.speedTo(temperatureValue)
-                        binding.latestDataTestView.addData(text)
-                    })
 
+                        with(binding) {
+                            textViewWeatherData.text = output
+                            speedView.speedTo(temperatureValue)
+                            latestDataTestView.addData(text)
+                            speedView.visibility = View.VISIBLE
+                            latestDataTestView.visibility = View.VISIBLE
+                            spinKit.visibility = View.GONE
+                        }
+                    })
                 }
                 catch (e: java.lang.Exception){
                     Log.d("ADVTECH", "Skipped diagnostics payloads.")

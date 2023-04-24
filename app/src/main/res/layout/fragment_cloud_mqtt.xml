@@ -7,16 +7,46 @@
     android:orientation="vertical"
     tools:context=".CloudMqttFragment">
 
-    <TextView
-        android:id="@+id/text_view_message"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TESTI" />
+        android:layout_margin="50dp"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/button_send_message"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="send" />
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="@string/text_header_hive_mqtt"
+            android:textColor="#091035"
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/editTextTextPersonName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:height="50dp"
+            android:ems="10"
+            android:hint="@string/message"
+            android:inputType="textPersonName" />
+
+        <Button
+            android:id="@+id/button_send_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20sp"
+            android:text="@string/send" />
+
+        <TextView
+            android:id="@+id/text_view_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#7E0830"
+            android:textSize="16sp" />
+    </LinearLayout>
 
 </LinearLayout>

@@ -6,12 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.em_tuntiesimerkki1.databinding.FragmentCloudMqttBinding
-import com.google.gson.GsonBuilder
 import com.hivemq.client.mqtt.MqttClient
 import com.hivemq.client.mqtt.mqtt3.Mqtt3AsyncClient
 import com.hivemq.client.mqtt.mqtt3.message.connect.connack.Mqtt3ConnAck
-import kotlin.random.Random
 
 class CloudMqttFragment : Fragment() {
 
@@ -59,14 +58,20 @@ class CloudMqttFragment : Fragment() {
                 }
             }
 
+        // Send message to mqtt-client
         binding.buttonSendMessage.setOnClickListener {
-            var randomNumber = Random.nextInt(0, 100)
-            var stringPayload = "Hello World! $randomNumber"
 
+            // Get payload from text input
+            val stringPayload = binding.editTextTextPersonName.text.toString()
+            // Publish to mqtt client
             client.publishWith()
                 .topic(BuildConfig.HIVE_MQTT_TOPIC)
                 .payload(stringPayload.toByteArray())
                 .send()
+            // Clear text input
+            binding.editTextTextPersonName.text.clear()
+
+            Toast.makeText(context, "Message sent", Toast.LENGTH_LONG).show()
         }
 
         return root
@@ -79,16 +84,16 @@ class CloudMqttFragment : Fragment() {
         client.disconnect()
     }
 
+
     private fun subscribeToTopic()
     {
-        val gson = GsonBuilder().setPrettyPrinting().create()
 
         client.subscribeWith()
             .topicFilter(BuildConfig.HIVE_MQTT_TOPIC)
             .callback { publish ->
 
                 // this callback runs everytime your code receives new data payload
-                var result = String(publish.getPayloadAsBytes())
+                var result = String(publish.payloadAsBytes)
                 Log.d("ADVTECH", result)
 
                 try {

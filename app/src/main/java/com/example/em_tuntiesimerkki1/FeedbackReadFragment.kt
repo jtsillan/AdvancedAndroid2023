@@ -1,14 +1,19 @@
 package com.example.em_tuntiesimerkki1
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
@@ -27,13 +32,21 @@ class FeedbackReadFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private lateinit var adapter: FeedbackAdapter
+    private lateinit var linearLayoutManager: LinearLayoutManager
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentFeedbackReadBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        // Create layout manager and bind its view to recyclerview
+        linearLayoutManager = LinearLayoutManager(context)
+        binding.recyclerViewFeedbackDetail.layoutManager = linearLayoutManager
 
         // the binding -object allows you to access views in the layout, textviews etc.
         binding.buttonFetchData.setOnClickListener {
@@ -48,8 +61,6 @@ class FeedbackReadFragment : Fragment() {
         return root
     }
 
-    var feedbacks : List<Feedback> = emptyList()
-
 
     private fun getFeedback() {
         // this is the url where we want to get our data from
@@ -59,23 +70,27 @@ class FeedbackReadFragment : Fragment() {
 
         // Request a string response from the provided URL.
         val stringRequest: StringRequest = object : StringRequest(
-            Request.Method.GET, JSON_URL,
+            Method.GET, JSON_URL,
             Response.Listener { response ->
                 val jsonObject = JSONObject(response)
                 val jsonArray = jsonObject.getJSONArray("data")
 
-                feedbacks = gson.fromJson(jsonArray.toString(), Array<Feedback>::class.java).toList()
-
+                var feedbacks = gson.fromJson(jsonArray.toString(), Array<Feedback>::class.java).toList()
+//
+                adapter = FeedbackAdapter(feedbacks as MutableList<Feedback>)
+                binding.recyclerViewFeedbackDetail.adapter = adapter
+//
                 for (item in feedbacks) {
                     Log.d("ADVTECH", item.name.toString())
                 }
-
-                val adapter = ArrayAdapter(context as Context, android.R.layout.simple_list_item_1, feedbacks)
-                binding.listViewFeekbackDetail.adapter = adapter
+//
+//                val adapter = ArrayAdapter(context as Context, android.R.layout.simple_list_item_1, feedbacks)
+//                binding.recyclerViewFeedbackDetail.adapter = adapter
 
                 // print the response as a whole
                 // we can use GSON to modify this response into something more usable
                 Log.d("ADVTECH", response)
+                Log.d("ADVTECH", jsonArray.toString())
 
             },
             Response.ErrorListener {
@@ -100,8 +115,10 @@ class FeedbackReadFragment : Fragment() {
         requestQueue.add(stringRequest)
     }
 
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 }
+

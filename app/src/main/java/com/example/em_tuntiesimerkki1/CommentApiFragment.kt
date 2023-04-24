@@ -51,7 +51,7 @@ class CommentApiFragment : Fragment() {
 
     private fun getComments() {
         // this is the url where we want to get our data from
-        val JSON_URL = "https://jsonplaceholder.typicode.com/comments"
+        val JSON_URL = BuildConfig.JSON_URL_COMMENTS
         // Alustetaan GSON
         val gson = GsonBuilder().setPrettyPrinting().create()
 

@@ -9,18 +9,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.preference.PreferenceManager
 import com.example.em_tuntiesimerkki1.databinding.FragmentOpenStreetBinding
+import com.google.android.gms.maps.model.MarkerOptions
 import org.osmdroid.views.MapView
 import org.osmdroid.config.Configuration.*
+import org.osmdroid.events.MapEventsReceiver
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.overlay.Marker
+import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
+import kotlin.math.roundToInt
+import kotlin.math.roundToLong
 
 
-/**
- * A simple [Fragment] subclass.
- * Use the [OpenStreetFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class OpenStreetFragment : Fragment() {
     // change this to match your fragment name
     private var _binding: FragmentOpenStreetBinding? = null
@@ -28,8 +28,6 @@ class OpenStreetFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-
-    //private lateinit var map : MapView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,24 +46,26 @@ class OpenStreetFragment : Fragment() {
         // asetetaan alkupiste + zoomaus
         val mapController = binding.map.controller
         mapController.setZoom(18.0)
-        val startPoint = GeoPoint(66.50352001528042, 25.727189822733095);
-        mapController.setCenter(startPoint);
+        val startPoint = GeoPoint(66.50352001528042, 25.727189822733095)
+        mapController.setCenter(startPoint)
+
 
         // lisätään marker Rovaniemelle
         val marker = Marker(binding.map)
+
         marker.position = startPoint
-        marker.title = "Rovaniemi marker!"
+        marker.title = " Position: ${startPoint.longitude}, ${startPoint.latitude}"
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
         binding.map.overlays.add(marker)
         binding.map.invalidate()
 
         // onClick onnistuu mm. näin
         marker.setOnMarkerClickListener { marker, mapView ->
-
-            Log.d("ADVTECH", "MARKKKERIIIII!")
+            marker.showInfoWindow()
 
             return@setOnMarkerClickListener false
         }
+
 
         return root
     }

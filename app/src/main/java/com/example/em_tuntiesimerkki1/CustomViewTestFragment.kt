@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.em_tuntiesimerkki1.databinding.FragmentCustomViewTestBinding
 import java.util.UUID
+import kotlin.random.Random
 
 
 class CustomViewTestFragment : Fragment() {
@@ -26,10 +27,10 @@ class CustomViewTestFragment : Fragment() {
         val root: View = binding.root
 
         // the binding -object allows you to access views in the layout, textviews etc.
-        binding.customTemperature.changeTemperature(7)
+        binding.customTemperature.changeTemperature((-30..-20).random())
 
         binding.buttonChangeTemperature.setOnClickListener {
-            binding.customTemperature.changeTemperature(-5)
+            binding.customTemperature.changeTemperature((-30..30).random())
         }
 
         binding.buttonAddTestMessage.setOnClickListener {

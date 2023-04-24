@@ -11,35 +11,29 @@ import com.example.em_tuntiesimerkki1.datatypes.todoitem.TodoItem
 
 class TodoAdapter(private val todos: List<TodoItem>) : RecyclerView.Adapter<TodoAdapter.TodoHolder>() {
 
-    // binding layerin muuttujien alustaminen
+    // Initialize variables for binding layer
     private var _binding: RecyclerviewTodoRowBinding? = null
     private val binding get() = _binding!!
 
-    // TodoHolderin onCreate-metodi. käytännössä tässä kytketään binding layer
-    // osaksi TodoHolder-luokkaan (adapterin sisäinen luokka)
-    // koska TodoAdapter pohjautuu RecyclerViewin perusadapteriin, täytyy tästä
-    // luokasta löytyä metodi nimeltä onCreateViewHolder
+    // ViewHolder onCreate method, binds binding layer part of TodoHolder -class
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoHolder {
-        // binding layerina toimii yksitätinen recyclerview_item_row.xml -instanssi
+        // Single recyclerview_todo_row.xml instance works as a binging layer
         _binding = RecyclerviewTodoRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return TodoHolder(binding)
     }
 
-    // tämä metodi kytkee yksittäisen toodo-objektin yksittäisen CommentHolder-instanssiin
-    // koska CommentAdapter pohjautuu RecyclerViewin perusadapteriin, täytyy tästä
-    // luokasta löytyä metodi nimeltä onBindViewHolder
+    // Binds single Todoo-object to TodoHolder instance
     override fun onBindViewHolder(holder: TodoHolder, position: Int) {
         val itemTodo = todos[position]
         holder.bindTodo(itemTodo)
     }
 
-    // Adapterin täytyy pysty tietämään sisältämänsä datan koko tämän metodin avulla
-    // koska CommentAdapter pohjautuu RecyclerViewin perusadapteriin, täytyy tästä
-    // luokasta löytyä metodi nimeltä getItemCount
+    // Adapter most know its size, mandatory class item
     override fun getItemCount(): Int {
         return todos.size
     }
 
+    // Defines logic which binds the view and data together
     class TodoHolder(v: RecyclerviewTodoRowBinding) : RecyclerView.ViewHolder(v.root), View.OnClickListener {
 
         // Variables for storing TodoItem data and view
@@ -73,6 +67,10 @@ class TodoAdapter(private val todos: List<TodoItem>) : RecyclerView.Adapter<Todo
                 // Set image as not checked
                 view.imageViewCompleted.setImageResource(R.drawable.red_cross)
             }
+            else {
+                // RecyclerView needs else-statement, otherwise sign is not shown
+                view.imageViewCompleted.setImageResource(R.drawable.check_box_ok)
+            }
 
             // Set todoTitle to view as text
             view.textViewTodoTitle.text = todoTitle
@@ -85,9 +83,6 @@ class TodoAdapter(private val todos: List<TodoItem>) : RecyclerView.Adapter<Todo
 
             // Set todoItem values to variables and pass to action
             val todoId = todo?.id as Int
-//            val todoUserId = todo?.userId as Int
-//            val todoTitle = todo?.title as String
-//            val todoCompleted = todo?.completed as Boolean
 
             // Navigate to TodoDetailFragment, item id as parameter
             val action = TodoItemFragmentDirections.actionTodoFragmentToTodoDetailFragment(todoId)

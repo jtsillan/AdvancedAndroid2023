@@ -50,8 +50,8 @@ class FeedBackSendFragment : Fragment() {
         return root
     }
 
-    // Apufunktion, jonka kautta uusi feedback lähetetaan Volleyllä
-    fun sendFeedback(name: String, location: String, value: String) {
+    // Helper function to send new feedback with Volley
+    private fun sendFeedback(name: String, location: String, value: String) {
         val JSON_URL = "http://10.0.2.2:8055/items/feedback?access_token=${BuildConfig.DIRECTUS_ACCESS_TOKEN}"
 
         var gson = GsonBuilder().create();

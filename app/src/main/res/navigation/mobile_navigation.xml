@@ -44,8 +44,8 @@
     <fragment
         android:id="@+id/commentApiFragment"
         android:name="com.example.em_tuntiesimerkki1.CommentApiFragment"
-        android:label="fragment_comment_api"
-        tools:layout="@layout/fragment_comment_api" >
+        android:label="Comment Api"
+        tools:layout="@layout/fragment_comment_api">
         <action
             android:id="@+id/action_commentApiFragment_to_apiDetailFragment"
             app:destination="@id/apiDetailFragment" />
@@ -72,8 +72,8 @@
     <fragment
         android:id="@+id/cityMarkerFragment"
         android:name="com.example.em_tuntiesimerkki1.datatypes.cityweather.CityMarkerFragment"
-        android:label="fragment_city_marker"
-        tools:layout="@layout/fragment_city_marker" >
+        android:label="City Marker"
+        tools:layout="@layout/fragment_city_marker">
         <argument
             android:name="latitude"
             app:argType="float" />
@@ -98,8 +98,8 @@
     <fragment
         android:id="@+id/feedBackSendFragment"
         android:name="com.example.em_tuntiesimerkki1.FeedBackSendFragment"
-        android:label="fragment_feed_back_send"
-        tools:layout="@layout/fragment_feed_back_send" >
+        android:label="Send Feedback"
+        tools:layout="@layout/fragment_feed_back_send">
         <action
             android:id="@+id/action_feedBackSendFragment_to_feedbackReadFragment"
             app:destination="@id/feedbackReadFragment" />
@@ -107,12 +107,12 @@
     <fragment
         android:id="@+id/basicAuthFragment"
         android:name="com.example.em_tuntiesimerkki1.BasicAuthFragment"
-        android:label="fragment_basic_auth"
+        android:label="Basic Authentication"
         tools:layout="@layout/fragment_basic_auth" />
     <fragment
         android:id="@+id/tempAccessFragment"
         android:name="com.example.em_tuntiesimerkki1.TempAccessFragment"
-        android:label="fragment_temp_access"
+        android:label="@string/temp_access"
         tools:layout="@layout/fragment_temp_access" />
     <fragment
         android:id="@+id/weatherStationFragment"
@@ -122,17 +122,17 @@
     <fragment
         android:id="@+id/cloudMqttFragment"
         android:name="com.example.em_tuntiesimerkki1.CloudMqttFragment"
-        android:label="fragment_cloud_mqtt"
+        android:label="Hive MQTT"
         tools:layout="@layout/fragment_cloud_mqtt" />
     <fragment
         android:id="@+id/customViewTestFragment"
         android:name="com.example.em_tuntiesimerkki1.CustomViewTestFragment"
-        android:label="fragment_custom_view_test"
+        android:label="Custom View"
         tools:layout="@layout/fragment_custom_view_test" />
     <fragment
         android:id="@+id/chartFragment"
         android:name="com.example.em_tuntiesimerkki1.ChartFragment"
-        android:label="fragment_chart"
+        android:label="Chart"
         tools:layout="@layout/fragment_chart" />
     <fragment
         android:id="@+id/todoFragment"
@@ -146,11 +146,11 @@
     <fragment
         android:id="@+id/todoDetailFragment"
         android:name="com.example.em_tuntiesimerkki1.TodoDetailFragment"
-        android:label="fragment_todo_detail"
-        tools:layout="@layout/fragment_todo_detail" >
+        android:label="Todo Details"
+        tools:layout="@layout/fragment_todo_detail">
         <argument
             android:name="id"
-            app:argType="integer"
-            android:defaultValue="-1" />
+            android:defaultValue="-1"
+            app:argType="integer" />
     </fragment>
 </navigation>

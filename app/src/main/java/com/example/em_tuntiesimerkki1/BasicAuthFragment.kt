@@ -7,12 +7,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.AuthFailureError
-import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.em_tuntiesimerkki1.databinding.FragmentBasicAuthBinding
+import com.google.gson.GsonBuilder
+import org.json.JSONObject
 
 class BasicAuthFragment : Fragment() {
     // change this to match your fragment name
@@ -22,6 +24,9 @@ class BasicAuthFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private lateinit var adapter: UserAdapter
+    private lateinit var linearLayoutManager: LinearLayoutManager
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -30,21 +35,43 @@ class BasicAuthFragment : Fragment() {
         _binding = FragmentBasicAuthBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        getUsers()
+        linearLayoutManager = LinearLayoutManager(context)
+        binding.recyclerViewUser.layoutManager = linearLayoutManager
 
-        // the binding -object allows you to access views in the layout, textviews etc.
+        // Get data from url and show it on view
+        binding.buttonGetDataBasicAuth.setOnClickListener {
+            getUsers()
+            // Hide recyclerView while loading
+            binding.recyclerViewUser.visibility = View.GONE
+            // Show loading spinner while loading
+            binding.spinKit.visibility = View.VISIBLE
+        }
 
         return root
     }
 
     private fun getUsers() {
         // this is the url where we want to get our data from
-        val JSON_URL = "https://apingweb.com/api/auth/users"
+        val JSON_URL = BuildConfig.JSON_URL
+
+        val gson = GsonBuilder().setPrettyPrinting().create()
 
         // Request a string response from the provided URL.
         val stringRequest: StringRequest = object : StringRequest(
-            Request.Method.GET, JSON_URL,
+            Method.GET, JSON_URL,
             Response.Listener { response ->
+                val jsonObject = JSONObject(response)
+                val jsonArray = jsonObject.getJSONArray("data")
+
+                var users = gson.fromJson(jsonArray.toString(), Array<User>::class.java).toList()
+
+                adapter = UserAdapter(users)
+                binding.recyclerViewUser.adapter = adapter
+
+                // Hide spinner when url request is ok
+                binding.spinKit.visibility = View.GONE
+                // Make recyclerView visible in view
+                binding.recyclerViewUser.visibility = View.VISIBLE
 
                 // print the response as a whole
                 // we can use GSON to modify this response into something more usable
@@ -66,7 +93,8 @@ class BasicAuthFragment : Fragment() {
 
                 // replace with your own API's login info
                 val authorizationString = "Basic " + Base64.encodeToString(
-                    ("admin" + ":" + "12345").toByteArray(), Base64.DEFAULT
+                    (BuildConfig.APING_WEB_BASIC_AUTH_USER_NAME + ":" +
+                    BuildConfig.APING_WEB_BASIC_AUTH_PASSWORD).toByteArray(), Base64.DEFAULT
                 )
 
                 Log.d("TESTI", authorizationString)

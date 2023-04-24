@@ -2,8 +2,8 @@
     <string name="app_name">EM_tuntiesimerkki1</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">Juha Sillanpää</string>
+    <string name="nav_header_subtitle">Advanced mobile programming</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
@@ -18,12 +18,12 @@
     <string name="api">Api</string>
     <string name="todo">Todo (Exercise 1)</string>
     <string name="todo_item">Todo Item</string>
-    <string name="basic_auth">Basic Auth</string>
-    <string name="temp_access">Temp Access</string>
-    <string name="weather_station">Weather Station (Exercise 4)</string>
-    <string name="hive_mqtt">Hive MQTT</string>
-    <string name="custom_view_test">Custom View Test</string>
-    <string name="chart">Chart</string>
+    <string name="basic_auth">Basic Auth (Exercise 3.3)</string>
+    <string name="temp_access">Temp Access (Exercise 3.4)</string>
+    <string name="weather_station">Weather Station (Exercise 4.1)</string>
+    <string name="hive_mqtt">Hive MQTT (Exercise 4.2)</string>
+    <string name="custom_view_test">Custom View (Exercise 5)</string>
+    <string name="chart">Chart (Extra exercise)</string>
     <string name="google_maps">Google Maps (Exercise 2)</string>
     <string name="maps">Maps</string>
     <string name="zoom_on_off">ZOOM on/off</string>
@@ -46,4 +46,12 @@
     <string name="send_feedback">Send feedback</string>
     <string name="waiting_for_data">WAITING FOR DATA</string>
     <string name="welcome">Welcome!</string>
+    <string name="basic_auth_header_text">This is a basic authentication test, gets data from https://apingweb.com/api/auth/users and shows it below.</string>
+    <string name="get_data">get data</string>
+    <string name="text_header_hive_mqtt">You can send and receive messages. Sent message is also displayed below.</string>
+    <string name="message">Message</string>
+    <string name="send">send</string>
+    <string name="text_home_fragment">Welcome to my app! This has been made for Advanced mobile programming course 2023.</string>
+    <string name="get_todo_data">Gets data from https://jsonplaceholder.typicode.com/todos. Items are clickable.</string>
+    <string name="temp_access_header_text">Temporary access is done automaticly to Directus localhost and time remaining is displayed below with refresh header.</string>
 </resources>

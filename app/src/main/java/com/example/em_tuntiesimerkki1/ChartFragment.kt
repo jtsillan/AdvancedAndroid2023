@@ -67,20 +67,6 @@ class ChartFragment : Fragment() {
                 }
             }
 
-        // the binding -object allows you to access views in the layout, textviews etc.
-
-//        temperatureList.add(5.5)
-//        temperatureList.add(6.5)
-//        temperatureList.add(7.5)
-//        temperatureList.add(8.5)
-//        temperatureList.add(9.5)
-//        temperatureList.add(10.5)
-//        temperatureList.add(11.5)
-//        temperatureList.add(12.5)
-//
-//        //.data(arrayOf(7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6))
-//
-//
         val aaChartModel : AAChartModel = AAChartModel()
             .chartType(AAChartType.Line)
             .title("MQTT Weather Station")
@@ -112,7 +98,7 @@ class ChartFragment : Fragment() {
             .callback { publish ->
 
                 // this callback runs everytime your code receives new data payload
-                var result = String(publish.getPayloadAsBytes())
+                var result = String(publish.payloadAsBytes)
                 Log.d("ADVTECH", result)
 
                 try {
@@ -143,8 +129,8 @@ class ChartFragment : Fragment() {
                             .data(pressureList.toTypedArray())
                     )
 
-                    // Ajetaan ulkoasuun liittyvät asiat UI-säikeessä
-                    // älä laita ui-threadiin mitää lisää taukkaa, muuten tulee ongelmia
+                    // Run ui related things in UI-tread
+                    // Don't put more stuff here, it's gonna cause problems
                     activity?.runOnUiThread(java.lang.Runnable {
                         // Set to chart
                         binding.aaChartView.aa_onlyRefreshTheChartDataWithChartOptionsSeriesArray(newArray, false)

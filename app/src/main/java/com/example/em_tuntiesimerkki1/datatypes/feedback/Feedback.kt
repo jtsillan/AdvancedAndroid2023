@@ -11,9 +11,9 @@ data class Feedback (
   @SerializedName("value"    ) var value    : String? = null
 
 )
-{
-  override fun toString(): String {
-    val text = name.toString() + ": " + value.toString()
-    return  text
-  }
-}
+//{
+//  override fun toString(): String {
+//    val text = name.toString() + ": " + value.toString()
+//    return  text
+//  }
+//}

@@ -18,11 +18,11 @@ import java.io.UnsupportedEncodingException
 
 class TempAccessFragment : Fragment() {
     // VARIABLES USED BY THE SESSION MANAGEMENT
-    val LOGIN_URL = "http://10.0.2.2:8055/auth/login"
+    val LOGIN_URL = BuildConfig.LOGIN_URL
 
     // these should be placed in the local properties file and used by BuildConfig
     // JSON_URL should be WITHOUT a trailing slash (/)!
-    val JSON_URL = "http://10.0.2.2:8055/items/feedback"
+    val JSON_URL_DIRECTUS = BuildConfig.JSON_URL_DIRECTUS
 
     // Using username + password in Directus
     val userName = BuildConfig.DIRECTUS_NEW_USER_USERNAME
@@ -40,6 +40,7 @@ class TempAccessFragment : Fragment() {
     // access token in this case is the same as session token
     var refreshToken = ""
     var accessToken = ""
+    var expires = ""
 
     // change this to match your fragment name
     private var _binding: FragmentTempAccessBinding? = null
@@ -55,11 +56,6 @@ class TempAccessFragment : Fragment() {
     ): View? {
         _binding = FragmentTempAccessBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-        // Button to fetch new data, check if access token is working
-        binding.buttonTestAccessToken.setOnClickListener {
-            dataAction()
-        }
 
         return root
     }
@@ -80,7 +76,7 @@ class TempAccessFragment : Fragment() {
     private fun loginAction()
     {
         Log.d("ADVTECH", "login")
-        Log.d("ADVTECH", JSON_URL + " login")
+        Log.d("ADVTECH", "$JSON_URL_DIRECTUS login")
         requestQueue?.add(loginRequest)
     }
 
@@ -112,6 +108,10 @@ class TempAccessFragment : Fragment() {
             // save the refresh token too if using refresh logic
             //refreshToken = responseJSON.get("refresh_token").toString()
             accessToken = responseJSON.getJSONObject("data").get("access_token").toString()
+            refreshToken = responseJSON.getJSONObject("data").get("refresh_token").toString()
+            expires = responseJSON.getJSONObject("data").get("expires").toString()
+
+            var expiresText = expires.toInt() / 1000
 
             loggedIn = true
 
@@ -119,6 +119,9 @@ class TempAccessFragment : Fragment() {
             dataAction()
 
             Log.d("ADVTECH", response)
+
+            binding.textViewRefreshToken.text = refreshToken
+            binding.textViewTimer.text = expiresText.toString()
 
             // Note: if you send data to API instead, this might not be needed
         },
@@ -161,7 +164,7 @@ class TempAccessFragment : Fragment() {
 
     // REQUEST OBJECT 3 : ACTUAL DATA -> FEEDBACK
     private var dataRequest: StringRequest = object : StringRequest(
-        Method.GET, JSON_URL,
+        Method.GET, JSON_URL_DIRECTUS,
         Response.Listener { response ->
             Log.d("ADVTECH", response)
         },
