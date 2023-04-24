@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/home_icon"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/todoFragment"
+            android:icon="@drawable/todo_check_box_icon"
+            android:title="@string/todo"/>
+        <item
+            android:id="@+id/mapsFragment"
+            android:icon="@drawable/google_maps_icon"
+            android:title="@string/google_maps"/>
+        <item
+            android:id="@+id/openStreetFragment"
+            android:icon="@drawable/open_street_map_icon"
+            android:title="@string/open_street_maps"/>
+        <item
+            android:id="@+id/feedbackReadFragment"
+            android:icon="@drawable/directus_logo"
+            android:title="@string/menu_directus"/>
+        <item
+            android:id="@+id/basicAuthFragment"
+            android:icon="@drawable/basic_auth_icon"
+            android:title="@string/basic_auth"/>
+        <item
+            android:id="@+id/tempAccessFragment"
+            android:icon="@drawable/temp_access_icon"
+            android:title="@string/temp_access"/>
+        <item
+            android:id="@+id/weatherStationFragment"
+            android:icon="@drawable/sun_icon"
+            android:title="@string/weather_station"/>
+        <item
+            android:id="@+id/cloudMqttFragment"
+            android:icon="@drawable/mqtt_icon"
+            android:title="@string/hive_mqtt"/>
+        <item
+            android:id="@+id/customViewTestFragment"
+            android:icon="@drawable/custom_view_icon"
+            android:title="@string/custom_view_test"/>
+        <item
+            android:id="@+id/chartFragment"
+            android:icon="@drawable/chart_icon"
+            android:title="@string/chart"/>
+    </group>
+</menu>

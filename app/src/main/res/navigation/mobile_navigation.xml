@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.em_tuntiesimerkki1.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_gallery"
+        android:name="com.example.em_tuntiesimerkki1.ui.gallery.GalleryFragment"
+        android:label="@string/menu_gallery"
+        tools:layout="@layout/fragment_gallery" />
+
+    <fragment
+        android:id="@+id/nav_slideshow"
+        android:name="com.example.em_tuntiesimerkki1.ui.slideshow.SlideshowFragment"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/dataReadFragment"
+        android:name="com.example.em_tuntiesimerkki1.DataReadFragment"
+        android:label="@string/menu_data"
+        tools:layout="@layout/fragment_data_read" >
+        <action
+            android:id="@+id/action_dataReadFragment_to_dataDetailFragment"
+            app:destination="@id/dataDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dataDetailFragment"
+        android:name="com.example.em_tuntiesimerkki1.DataDetailFragment"
+        android:label="fragment_data_detail"
+        tools:layout="@layout/fragment_data_detail" >
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+    <fragment
+        android:id="@+id/commentApiFragment"
+        android:name="com.example.em_tuntiesimerkki1.CommentApiFragment"
+        android:label="Comment Api"
+        tools:layout="@layout/fragment_comment_api">
+        <action
+            android:id="@+id/action_commentApiFragment_to_apiDetailFragment"
+            app:destination="@id/apiDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/apiDetailFragment"
+        android:name="com.example.em_tuntiesimerkki1.ApiDetailFragment"
+        android:label="fragment_api_detail"
+        tools:layout="@layout/fragment_api_detail" >
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.example.em_tuntiesimerkki1.MapsFragment"
+        android:label="Google Maps"
+        tools:layout="@layout/fragment_maps">
+        <action
+            android:id="@+id/action_mapsFragment_to_cityMarkerFragment"
+            app:destination="@id/cityMarkerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cityMarkerFragment"
+        android:name="com.example.em_tuntiesimerkki1.datatypes.cityweather.CityMarkerFragment"
+        android:label="City Marker"
+        tools:layout="@layout/fragment_city_marker">
+        <argument
+            android:name="latitude"
+            app:argType="float" />
+        <argument
+            android:name="longitude"
+            app:argType="float" />
+    </fragment>
+    <fragment
+        android:id="@+id/openStreetFragment"
+        android:name="com.example.em_tuntiesimerkki1.OpenStreetFragment"
+        android:label="Open Street Maps"
+        tools:layout="@layout/fragment_open_street" />
+    <fragment
+        android:id="@+id/feedbackReadFragment"
+        android:name="com.example.em_tuntiesimerkki1.FeedbackReadFragment"
+        android:label="@string/directus_api_test"
+        tools:layout="@layout/fragment_feedback_read" >
+        <action
+            android:id="@+id/action_feedbackReadFragment_to_feedBackSendFragment"
+            app:destination="@id/feedBackSendFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/feedBackSendFragment"
+        android:name="com.example.em_tuntiesimerkki1.FeedBackSendFragment"
+        android:label="Send Feedback"
+        tools:layout="@layout/fragment_feed_back_send">
+        <action
+            android:id="@+id/action_feedBackSendFragment_to_feedbackReadFragment"
+            app:destination="@id/feedbackReadFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/basicAuthFragment"
+        android:name="com.example.em_tuntiesimerkki1.BasicAuthFragment"
+        android:label="Basic Authentication"
+        tools:layout="@layout/fragment_basic_auth" />
+    <fragment
+        android:id="@+id/tempAccessFragment"
+        android:name="com.example.em_tuntiesimerkki1.TempAccessFragment"
+        android:label="@string/temp_access"
+        tools:layout="@layout/fragment_temp_access" />
+    <fragment
+        android:id="@+id/weatherStationFragment"
+        android:name="com.example.em_tuntiesimerkki1.WeatherStationFragment"
+        android:label="Weather Station"
+        tools:layout="@layout/fragment_weather_station" />
+    <fragment
+        android:id="@+id/cloudMqttFragment"
+        android:name="com.example.em_tuntiesimerkki1.CloudMqttFragment"
+        android:label="Hive MQTT"
+        tools:layout="@layout/fragment_cloud_mqtt" />
+    <fragment
+        android:id="@+id/customViewTestFragment"
+        android:name="com.example.em_tuntiesimerkki1.CustomViewTestFragment"
+        android:label="Custom View"
+        tools:layout="@layout/fragment_custom_view_test" />
+    <fragment
+        android:id="@+id/chartFragment"
+        android:name="com.example.em_tuntiesimerkki1.ChartFragment"
+        android:label="Chart"
+        tools:layout="@layout/fragment_chart" />
+    <fragment
+        android:id="@+id/todoFragment"
+        android:name="com.example.em_tuntiesimerkki1.TodoItemFragment"
+        android:label="Todo Access"
+        tools:layout="@layout/fragment_todo_item">
+        <action
+            android:id="@+id/action_todoFragment_to_todoDetailFragment"
+            app:destination="@id/todoDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/todoDetailFragment"
+        android:name="com.example.em_tuntiesimerkki1.TodoDetailFragment"
+        android:label="Todo Details"
+        tools:layout="@layout/fragment_todo_detail">
+        <argument
+            android:name="id"
+            android:defaultValue="-1"
+            app:argType="integer" />
+    </fragment>
+</navigation>
